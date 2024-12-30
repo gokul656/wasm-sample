@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Grayscale Image Converter</title>
+</head>
+<script src="./wasm_exec.js"></script>
+<script>
+    const go = new Go(); // Provided by wasm_exec.js
+    WebAssembly.instantiateStreaming(fetch("./main.wasm"), go.importObject).then(
+        (result) => {
+            go.run(result.instance);
+        },
+    );
+
+    function convertImageToGrayScale() {
+        const imageInput = document.getElementById("imageInput");
+        const file = imageInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            const base64String = reader.result.split(",")[1]; // Remove the prefix
+
+            // Call the WASM function
+            const grayImageBase64 = convertToGreyScale(base64String);
+
+            // Display the grayscale image
+            document.getElementById("outputImage").src = `data:image/jpeg;base64,${grayImageBase64}`;
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>
+
+<body>
+    <h1>Grayscale Image Converter</h1>
+    <input type="file" id="imageInput" accept="image/*" />
+    <button onclick="convertImageToGrayScale()">
+        Convert to Grayscale
+    </button>
+    <br />
+    <h2>Output</h2>
+    <img id="outputImage" alt="Grayscale Image" />
+</body>
+
+</html>
