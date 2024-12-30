@@ -1,0 +1,78 @@
+.main {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: rgb(158, 220, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dottedoutline {
+  border: 2px dashed white;
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: inherit;
+  flex-direction: column;
+  justify-content: inherit;
+  align-items: inherit;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+
+}
+
+.dnd {
+  margin-top: 10px;
+  color: rgb(50, 50, 50);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 10px;
+  margin-top: 8px;
+  color: rgb(50, 50, 50);
+}
+
+.logo {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.dottedoutline:hover {
+  border-color: grey;
+}
+
+.button {
+  border-radius: 8px;
+  padding: 8px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgb(50, 50, 50);
+  color: white;
+}
