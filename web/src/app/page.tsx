@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 
-
 declare global {
   interface Window {
     convertToGreyScale: (base64String: string) => string;
@@ -20,16 +19,10 @@ export default function Home() {
     const loadWasm = async () => {
       if (typeof window === "undefined") return;
 
-      const script = document.createElement("script");
-      script.src = "/wasm_exec.js";
-      script.async = true;
-      script.onload = async () => {
-        const go = new Go();
-        const wasm = await WebAssembly.instantiateStreaming(fetch("/main.wasm"), go.importObject);
-        go.run(wasm.instance);
-        setWasmLoaded(true);
-      };
-      document.body.appendChild(script);
+      const go = new Go();
+      const wasm = await WebAssembly.instantiateStreaming(fetch("/main.wasm"), go.importObject);
+      go.run(wasm.instance);
+      setWasmLoaded(true);
     };
 
     loadWasm();
@@ -47,7 +40,7 @@ export default function Home() {
       return;
     }
 
-    const base64String = previewImage.split(",")[1]; // Remove the prefix
+    const base64String = previewImage.split(",")[1]; // Remove data:image/jpeg;base64,
 
     if (typeof window.convertToGreyScale !== "function") {
       alert("WASM function not found. Please ensure the WebAssembly module is loaded.");
